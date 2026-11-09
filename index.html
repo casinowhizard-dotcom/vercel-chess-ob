@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Class Strategy - Opening Repertoire Guide</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Reset & Base Variables */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #0a0c10;
+      --card-bg: rgba(18, 22, 31, 0.95);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --gold-primary: #d4af37;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --crimson-glow: #ff2a5f;
+      --crimson-border: rgba(255, 42, 95, 0.85);
+      --crimson-bg: linear-gradient(145deg, rgba(65, 12, 28, 0.9), rgba(22, 6, 12, 0.95));
+      --blue-glow: #38bdf8;
+      --blue-border: rgba(56, 189, 248, 0.85);
+      --blue-bg: linear-gradient(145deg, rgba(12, 36, 68, 0.9), rgba(6, 16, 32, 0.95));
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Modern Dark Theme with Subtle Chessboard Grid Pattern */
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-dark);
+      background-image: 
+        linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%), 
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%), 
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%);
+      background-size: 56px 56px;
+      background-position: 0 0, 0 28px, 28px -28px, -28px 0px;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Strict Single-Column Wrapper Hierarchy */
+    .wrapper-card {
+      width: 100%;
+      max-width: 860px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    @media (max-width: 640px) {
+      .wrapper-card {
+        padding: 24px 18px;
+        border-radius: 18px;
+        gap: 24px;
+      }
+    }
+
+    /* 1. Badge & Main Title */
+    .header-group {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .strategy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-primary);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    .main-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3.8vw, 2.7rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      max-width: 780px;
+    }
+
+    /* 2. Article Introduction Text */
+    .intro-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 32px;
+    }
+
+    .intro-content p {
+      color: #cbd5e1;
+    }
+
+    .identity-heading {
+      font-family: var(--font-heading);
+      color: #ffffff;
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-top: 12px;
+      letter-spacing: 0.03em;
+    }
+
+    /* 3. Interactive Selection Interface */
+    .selector-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      .selector-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .select-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 18px 20px;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      outline: none;
+    }
+
+    .select-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    /* Active States */
+    .select-btn#btn-tactical.active {
+      border-color: var(--crimson-border);
+      box-shadow: 0 0 25px rgba(255, 42, 95, 0.45);
+      color: #ffffff;
+      background: rgba(255, 42, 95, 0.12);
+    }
+
+    .select-btn#btn-positional.active {
+      border-color: var(--blue-border);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.45);
+      color: #ffffff;
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    /* 4. Interactive Dynamic Content Boxes */
+    .dynamic-box-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .dynamic-box {
+      display: none;
+      padding: 24px;
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.65;
+      letter-spacing: 0.01em;
+    }
+
+    .dynamic-box.active {
+      display: block;
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tactical-box {
+      background: var(--crimson-bg);
+      border: 1px solid var(--crimson-border);
+      color: #ffe4e9;
+      box-shadow: 0 0 35px rgba(255, 42, 95, 0.25);
+    }
+
+    .positional-box {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      color: #e0f2fe;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+    }
+
+    /* 5. Core Strategy Walkthroughs */
+    .walkthroughs-container {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 8px;
+    }
+
+    .walkthrough-block {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .block-heading {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .opening-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .opening-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .color-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: 0.08em;
+    }
+
+    .color-white {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .color-black {
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .moves {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: var(--gold-primary);
+      width: fit-content;
+      margin-top: 2px;
+    }
+
+    .opening-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Strict Single-Column Wrapper Card -->
+  <main class="wrapper-card">
+
+    <!-- 1. The Badge & Main Title -->
+    <header class="header-group">
+      <div class="strategy-badge">🏆 Master Class Strategy</div>
+      <h1 class="main-title">Beyond the First Move: A Beginner’s Guide to Choosing an Opening Repertoire in Chess</h1>
+    </header>
+
+    <!-- 2. The Article Introduction Text -->
+    <section class="intro-content">
+      <p>Do you want to master chess? The first rule is not to try and memorize twenty moves of deep theory. That is for the masters. Mere mortals like us should try and reach a middlegame position where we understand the gameplan better than our opponent.</p>
+      <p>For beginner and intermediate players, the sheer volume of choices is paralyzing. Should you attack immediately, or opt for a slower setup?</p>
+      <p>Building an opening repertoire comes down to understanding your personal playing style. Rather than trying to learn everything, your goal should be to master two reliable setups: one for White, and one for Black. Here is how to find the framework that matches how your brain visualizes the board.</p>
+      <h2 class="identity-heading">What Is Your Chess Identity</h2>
+    </section>
+
+    <!-- 3. Interactive Chess Identity Selection Interface -->
+    <section class="selector-grid" role="tablist">
+      <button 
+        id="btn-tactical" 
+        class="select-btn" 
+        onclick="switchIdentity('tactical')" 
+        role="tab" 
+        aria-selected="false">
+        💥 Tactical Attacker Setup (Open Style)
+      </button>
+      <button 
+        id="btn-positional" 
+        class="select-btn" 
+        onclick="switchIdentity('positional')" 
+        role="tab" 
+        aria-selected="false">
+        🎯 Patient Strategist Setup (Closed Style)
+      </button>
+    </section>
+
+    <!-- 4. Interactive Dynamic Content Boxes -->
+    <section class="dynamic-box-wrapper">
+      <div id="profile-tactical" class="dynamic-box tactical-box" role="tabpanel">
+        ACTIVE PROFILE: THE TACTICAL ATTACKER — You excel in sharp, open positions with heavy tactical options. Your strategy requires rapid piece movement. For White, weaponize the Italian Game (1.e4 e5 2.Nf3 Nc6 3.Bc4) to command space early. For Black, answer with the Sicilian Defense (1.e4 c5) to force an immediate sharp, unbalanced structure built to score maximum wins.
+      </div>
+      <div id="profile-positional" class="dynamic-box positional-box" role="tabpanel">
+        ACTIVE PROFILE: THE PATIENT STRATEGIST — You build flawless, secure defensive lines. Your strategy targets long-term positional pressure and perfect pawn structures. For White, implement the Queen's Gambit (1.d4 d5 2.c4) to systematically constrict space. For Black, deploy the Caro-Kann Defense (1.e4 c6 2.d4 d5) to achieve structural security outside your pawn line.
+      </div>
+    </section>
+
+    <!-- 5. Core Strategy Walkthroughs (Static Single Column Layout) -->
+    <section class="walkthroughs-container">
+
+      <!-- Block 1 -->
+      <article class="walkthrough-block">
+        <h3 class="block-heading">1. The Tactical Attacker (Open Games)</h3>
+        
+        <div class="opening-item">
+          <div class="opening-header">
+            <span class="color-pill color-white">White</span>
+            <span>The Italian Game</span>
+          </div>
+          <span class="moves">1.e4 e5 2.Nf3 Nc6 3.Bc4</span>
+          <p class="opening-desc">Targets the vulnerable f7-square right out of the gate. Offers rapid king-side castling, rapid initiative generation, and open paths for direct attacking sequences.</p>
+        </div>
+
+        <div class="opening-item">
+          <div class="opening-header">
+            <span class="color-pill color-black">Black</span>
+            <span>The Open Sicilian</span>
+          </div>
+          <span class="moves">1.e4 c5</span>
+          <p class="opening-desc">Asymmetrical, fiercely ambitious warfare. Rather than mirroring White, Black sacrifices central symmetry to trade a flank pawn for a center pawn, creating sharp queenside tactical play.</p>
+        </div>
+      </article>
+
+      <!-- Block 2 -->
+      <article class="walkthrough-block">
+        <h3 class="block-heading">2. The Patient Strategist (Closed Games)</h3>
+
+        <div class="opening-item">
+          <div class="opening-header">
+            <span class="color-pill color-white">White</span>
+            <span>The Queen's Gambit</span>
+          </div>
+          <span class="moves">1.d4 d5 2.c4</span>
+          <p class="opening-desc">A classic, commanding opening offering a wing pawn to gain iron grip control over the center. Highly structured, lower tactical volatility, and sustained positional pressure.</p>
+        </div>
+
+        <div class="opening-item">
+          <div class="opening-header">
+            <span class="color-pill color-black">Black</span>
+            <span>The Caro-Kann Defense</span>
+          </div>
+          <span class="moves">1.e4 c6 2.d4 d5</span>
+          <p class="opening-desc">A rock-solid defensive fortress. Prepares a sound d5 pawn push without locking Black's light-squared bishop behind the pawn chain, allowing you to steadily grind down hasty attackers.</p>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- 6. Airtight JavaScript Click Switch Mechanic -->
+  <script>
+    function switchIdentity(profile) {
+      const btnTactical = document.getElementById('btn-tactical');
+      const btnPositional = document.getElementById('btn-positional');
+      const boxTactical = document.getElementById('profile-tactical');
+      const boxPositional = document.getElementById('profile-positional');
+
+      if (profile === 'tactical') {
+        // Activate Tactical Elements
+        btnTactical.classList.add('active');
+        btnTactical.setAttribute('aria-selected', 'true');
+        boxTactical.classList.add('active');
+
+        // Deactivate Positional Elements
+        btnPositional.classList.remove('active');
+        btnPositional.setAttribute('aria-selected', 'false');
+        boxPositional.classList.remove('active');
+      } else if (profile === 'positional') {
+        // Activate Positional Elements
+        btnPositional.classList.add('active');
+        btnPositional.setAttribute('aria-selected', 'true');
+        boxPositional.classList.add('active');
+
+        // Deactivate Tactical Elements
+        btnTactical.classList.remove('active');
+        btnTactical.setAttribute('aria-selected', 'false');
+        boxTactical.classList.remove('active');
+      }
+    }
+
+    // Initialize tactical profile on page load so view is never blank
+    document.addEventListener('DOMContentLoaded', () => {
+      switchIdentity('tactical');
+    });
+  </script>
+
+</body>
+</html>
